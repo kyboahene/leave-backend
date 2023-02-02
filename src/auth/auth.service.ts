@@ -6,7 +6,7 @@ import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 import { AuthDto, LoginDto } from '@/auth/dto';
 import { User } from '@/interfaces/user.interface';
-import { PrismaService } from '@/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 
 @Injectable()

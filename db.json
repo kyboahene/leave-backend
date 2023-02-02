@@ -218,7 +218,7 @@
       "employee_id": 2,
       "leave_type": "Annual",
       "no_of_days": 24,
-      "start_date": "10 m,/05/2023",
+      "start_date": "10/05/2023",
       "end_date": "",
       "leave_year": "2023",
       "status": "Started"
