@@ -29,10 +29,109 @@ model Employee {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  hire_date DateTime
+  hire_date     DateTime
+  employee_type EmployeeType
 
-  user_id Int  @unique
-  user    User @relation(fields: [user_id], references: [id])
+  user_id Int     @unique
+  user    User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  Leave   Leave[]
 
   @@map("employees")
+}
+
+model Role {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name         String
+  access_level Int
+}
+
+model Division {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name       String
+  Region     Region[]
+  Department Department[]
+}
+
+model Region {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name        String
+  division_id Int
+  division    Division   @relation(fields: [division_id], references: [id], onDelete: Cascade)
+  District    District[]
+}
+
+model Department {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name String
+
+  division_id Int
+  division    Division @relation(fields: [division_id], references: [id], onDelete: Cascade)
+}
+
+model District {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  name String
+
+  region_id Int
+  region    Region @relation(fields: [region_id], references: [id], onDelete: Cascade)
+}
+
+model Leave {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  no_of_days Int
+  leave_year LeaveType
+  status     LeaveStatus @default(STARTED)
+  start_date DateTime
+  end_date   DateTime
+
+  employee_id Int
+  employee    Employee  @relation(fields: [employee_id], references: [id], onDelete: Cascade)
+  Comment     Comment[]
+}
+
+model Comment {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  body String
+
+  leave_id Int
+  leave    Leave @relation(fields: [leave_id], references: [id], onDelete: Cascade)
+}
+
+enum EmployeeType {
+  JUNIOR
+  SENOIR
+}
+
+enum LeaveType {
+  ANNUAL
+  CASUAL
+  PARTENITY
+  MARTENTY
+}
+
+enum LeaveStatus {
+  STARTED
+  DIRECTOR_APPROVE
+  SCHEDULE_OFFICER_REVIEWS
 }
