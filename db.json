@@ -1,0 +1,227 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "user 1",
+      "password": "testuser127",
+      "email": "user1@gmail.com",
+      "role_id": 1,
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "user 2",
+      "password": "testuser127",
+      "email": "user7@gmail.com",
+      "role_id": 2,
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "user 3",
+      "password": "testuser127",
+      "email": "user3@gmail.com",
+      "role_id": 3,
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "name": "user 4",
+      "password": "testuser127",
+      "email": "user7@gmail.com",
+      "role_id": 1,
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "user 5",
+      "password": "testuser127",
+      "email": "user7@gmail.com",
+      "role_id": 5,
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "name": "user 6",
+      "password": "testuser127",
+      "email": "user7@gmail.com",
+      "role_id": 6,
+      "status": "Active"
+    },
+    {
+      "id": 7,
+      "name": "user 7",
+      "password": "testuser127",
+      "email": "user7@gmail.com",
+      "role_id": 1,
+      "status": "Active"
+    },
+    {
+      "id": 8,
+      "name": "user 8",
+      "password": "testuser128",
+      "email": "user8@gmail.com",
+      "role_id": 2,
+      "status": "Active"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "region_id": 1,
+      "division_id": 1,
+      "district_id": 1,
+      "dept_id": 1,
+      "hire_date": "1/01/2022",
+      "user_id": 1,
+      "employee_type": "Permanent"
+    },
+    {
+      "id": 2,
+      "region_id": 1,
+      "division_id": 1,
+      "district_id": 1,
+      "dept_id": 1,
+      "hire_date": "25/01/2023",
+      "user_id": 1,
+      "employee_type": "Senior"
+    },
+    {
+      "id": 3,
+      "region_id": 2,
+      "division_id": 2,
+      "district_id": 2,
+      "dept_id": 2,
+      "hire_date": "25/03/2022",
+      "user_id": 2,
+      "employee_type": "Senior"
+    },
+    {
+      "id": 3,
+      "region_id": 2,
+      "division_id": 2,
+      "district_id": 2,
+      "dept_id": 2,
+      "hire_date": "12/01/2023",
+      "user_id": 2,
+      "employee_type": "Junior"
+    },
+    {
+      "id": 3,
+      "region_id": 2,
+      "division_id": 2,
+      "dept_id": 2,
+      "hire_date": "09/01/2023",
+      "user_id": 2,
+      "employee_type": "Junior"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "Head of Department",
+      "access_level": 2
+    },
+    {
+      "id": 2,
+      "name": "Schedule Officer",
+      "access_level": 3
+    },
+    {
+      "id": 3,
+      "name": "Welfare Manager",
+      "access_level": 4
+    },
+    {
+      "id": 4,
+      "name": "Director HR",
+      "access_level": 5
+    },
+    {
+      "id": 5,
+      "name": "User",
+      "access_level": 1
+    },
+    {
+      "id": 6,
+      "name": "Admin",
+      "access_level": 6
+    }
+  ],
+  "divisions": [
+    {
+      "id": 1,
+      "name": "BOD"
+    },
+    {
+      "id": 2,
+      "name": "CHED"
+    },
+    {
+      "id": 3,
+      "name": "SPD"
+    },
+    {
+      "id": 4,
+      "name": "QCC"
+    }
+  ],
+  "regions": [
+    {
+      "id": 1,
+      "name": "Central",
+      "division_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Greater Accra",
+      "division_id": 2
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "name": "Finance",
+      "division_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Research",
+      "division_id": 2
+    }
+  ],
+  "districts": [
+    {
+      "id": 1,
+      "name": "Asikuma",
+      "region_id": 1
+    },
+    {
+      "id": 2,
+      "name": "Amasaman",
+      "region_id": 2
+    }
+  ],
+  "leave": [
+    {
+      "id": 1,
+      "employee_id": 1,
+      "leave_type": "Annual",
+      "no_of_days": 58,
+      "start_date": "03/05/2023",
+      "end_date": "",
+      "leave_year": "2023",
+      "status": "Started"
+    },
+    {
+      "id": 2,
+      "employee_id": 2,
+      "leave_type": "Annual",
+      "no_of_days": 24,
+      "start_date": "10 m,/05/2023",
+      "end_date": "",
+      "leave_year": "2023",
+      "status": "Started"
+    }
+  ]
+}
