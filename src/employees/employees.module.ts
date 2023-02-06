@@ -3,7 +3,7 @@ import { EmployeesService } from './employees.service';
 import { EmployeesController } from './employees.controller';
 
 @Module({
-  providers: [EmployeesService],
-  controllers: [EmployeesController]
+  controllers: [EmployeesController],
+  providers: [EmployeesService]
 })
 export class EmployeesModule {}
