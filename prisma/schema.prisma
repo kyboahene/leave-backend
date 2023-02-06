@@ -32,9 +32,18 @@ model Employee {
   hire_date     DateTime
   employee_type EmployeeType
 
+  division_id Int
+  division    Division @relation(fields: [division_id], references: [id], onDelete: Cascade)
+
+  district_id Int
+  district    District @relation(fields: [district_id], references: [id], onDelete: Cascade)
+
+  region_id Int
+  region    Region @relation(fields: [region_id], references: [id], onDelete: Cascade)
+
   user_id Int     @unique
   user    User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  Leave   Leave[]
+  leave   Leave[]
 
   @@map("employees")
 }
@@ -53,9 +62,11 @@ model Division {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  name       String
+  name String
+
   Region     Region[]
-  Department Department[]
+  employee   Employee[]
+  department Department[]
 }
 
 model Region {
@@ -63,10 +74,13 @@ model Region {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  name        String
+  name String
+
   division_id Int
-  division    Division   @relation(fields: [division_id], references: [id], onDelete: Cascade)
-  District    District[]
+  division    Division @relation(fields: [division_id], references: [id], onDelete: Cascade)
+
+  district District[]
+  employee Employee[]
 }
 
 model Department {
@@ -88,7 +102,8 @@ model District {
   name String
 
   region_id Int
-  region    Region @relation(fields: [region_id], references: [id], onDelete: Cascade)
+  region    Region     @relation(fields: [region_id], references: [id], onDelete: Cascade)
+  Employee  Employee[]
 }
 
 model Leave {
@@ -104,7 +119,7 @@ model Leave {
 
   employee_id Int
   employee    Employee  @relation(fields: [employee_id], references: [id], onDelete: Cascade)
-  Comment     Comment[]
+  comment     Comment[]
 }
 
 model Comment {
@@ -120,7 +135,7 @@ model Comment {
 
 enum EmployeeType {
   JUNIOR
-  SENOIR
+  SENIOR
 }
 
 enum LeaveType {
