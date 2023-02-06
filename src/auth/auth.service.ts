@@ -26,8 +26,6 @@ export class AuthService {
             })
             delete user.password
 
-
-
             return user
         } catch (error) {
             if (error instanceof PrismaClientKnownRequestError) {
