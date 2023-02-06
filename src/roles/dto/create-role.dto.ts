@@ -14,7 +14,6 @@ export class CreateRoleDto {
         description: 'The access level of the role',
         example: 6
     })
-    @IsString()
     @IsNumber()
     @IsNotEmpty()
     access_level: number
