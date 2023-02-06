@@ -1,1 +1,3 @@
-export class CreateDivisionDto {}
+export class CreateDivisionDto {
+    name: string
+}

@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+
 import { DivisionsService } from './divisions.service';
-import { CreateDivisionDto } from './dto/create-division.dto';
-import { UpdateDivisionDto } from './dto/update-division.dto';
+import { CreateDivisionDto, UpdateDivisionDto } from './dto';
 
 @Controller('divisions')
 export class DivisionsController {
-  constructor(private readonly divisionsService: DivisionsService) {}
+  constructor(private readonly divisionsService: DivisionsService) { }
 
   @Post()
   create(@Body() createDivisionDto: CreateDivisionDto) {
