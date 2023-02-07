@@ -25,6 +25,8 @@ describe('App e2e', () => {
 
     prisma = app.get(PrismaService)
     await prisma.cleanDB()
+
+    pactum.request.setBaseUrl('http://localhost:3333')
   })
 
   afterAll(() => {
@@ -32,18 +34,30 @@ describe('App e2e', () => {
   })
 
   describe("Auth", () => {
+    const dto: AuthDto = {
+      email: 'yaw@mailinator.com',
+      name: 'Yaw Kyei',
+      password: "password"
+    }
+
     describe("signup", () => {
+      it('should throw error if email is empty', () => {
+        return pactum.spec().post('/auth/register').withBody({ password: dto.password }).expectStatus(400)
+      })
+
+      it('should throw error if password is empty', () => {
+        return pactum.spec().post('/auth/register').withBody({ email: dto.password }).expectStatus(400)
+      })
+
       it('should signup', () => {
-        const dto: AuthDto = {
-          email: 'yaw@mailinator.com',
-          name: 'Yaw Kyei',
-          password: "password"
-        }
-        return pactum.spec().post('http://localhost:3333/auth/register').withBody(dto).expectStatus(201)
+        return pactum.spec().post('/auth/register').withBody(dto).expectStatus(201)
       })
     })
 
     describe("login", () => {
+      it('should login', () => {
+        return pactum.spec().post('/auth/login').withBody(dto).expectStatus(200)
+      })
     })
   })
 

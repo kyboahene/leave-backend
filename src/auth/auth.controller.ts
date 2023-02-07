@@ -1,8 +1,10 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { SendResetEmailDto } from './dto/send-email.dto';
+import { Controller, Post, Body, HttpCode, HttpStatus, Query } from '@nestjs/common';
+import { ApiCreatedResponse, ApiBadRequestResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthDto, LoginDto } from './dto';
 import { AuthService } from './auth.service';
-import { ApiCreatedResponse, ApiBadRequestResponse, ApiTags } from '@nestjs/swagger';
+import { PasswordResetDto } from './dto/password-reset.dto';
 
 @ApiTags('Authentication')
 @Controller('auth')
@@ -29,6 +31,16 @@ export class AuthController {
         description: 'User cannot login. Try again!'
     })
     login(@Body() dto: LoginDto) {
-        this.authService.login(dto);
+        return this.authService.login(dto);
+    }
+
+    @Post('/sendEmail')
+    sendResetEmail(@Body() email: SendResetEmailDto) {
+        return this.authService.sendEmail(email)
+    }
+
+    @Post('resetPassword')
+    resetPassword(@Query('token') token: string, @Body() passwordResetDto: PasswordResetDto) {
+        return this.authService.resetPassword(token, passwordResetDto)
     }
 }
