@@ -91,9 +91,10 @@ export class AuthService {
         if (!user) throw new BadRequestException("Invalid email");
 
         const token = await this.signToken(user, "10m");
-        const resetPasswordUrl = `${this.config.get("BASE_URL")}:${this.config.get(
-            "PORT"
-        )}/auth/resetPassword?token=${token}`;
+        // const resetPasswordUrl = `${this.config.get("BASE_URL")}:${this.config.get(
+        //     "PORT"
+        // )}/auth/resetPassword?token=${token}`;
+        const resetPasswordUrl = `${this.config.get("BASE_URL")}auth/resetPassword?token=${token}`;
 
         return {
             url: resetPasswordUrl,
