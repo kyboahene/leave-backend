@@ -2,8 +2,7 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, ForbiddenException } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
-import { CreateDivisionDto } from './dto/create-division.dto';
-import { UpdateDivisionDto } from './dto/update-division.dto';
+import { CreateDivisionDto, UpdateDivisionDto } from './dto';
 
 @Injectable()
 export class DivisionsService {
@@ -26,11 +25,7 @@ export class DivisionsService {
   }
 
   findAll() {
-    try {
-      return this.prisma.division.findMany({})
-    } catch (error) {
-      throw new Error(error)
-    }
+    return this.prisma.division.findMany()
   }
 
   findOne(id: number) {
