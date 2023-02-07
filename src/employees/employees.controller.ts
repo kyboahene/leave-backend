@@ -29,7 +29,7 @@ export class EmployeesController {
   @UseGuards(JwtGuard)
   @Get()
   @ApiCreatedResponse({
-    description: "Created an array of employee object(s) as response",
+    description: "Returned an array of employee object(s) as response",
     type: [Employee]
   })
   @ApiBadRequestResponse({
@@ -41,6 +41,10 @@ export class EmployeesController {
 
   @UseGuards(JwtGuard)
   @Get(':id')
+  @ApiCreatedResponse({
+    description: "Return an employee object as response",
+    type: Employee
+  })
   findOne(@Param('id') id: string) {
     return this.employeesService.findOne(+id);
   }
