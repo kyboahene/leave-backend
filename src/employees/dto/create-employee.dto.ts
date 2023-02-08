@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { EmployeeType } from "@prisma/client";
-import { IsString, IsNotEmpty, IsEnum, IsNumber } from "class-validator";
+import { IsString, IsNotEmpty, IsEnum, IsNumber, IsDate } from "class-validator";
 
 export class CreateEmployeeDto {
     @ApiProperty({
@@ -31,7 +31,7 @@ export class CreateEmployeeDto {
         description: 'The hire date of the employee',
         example: ""
     })
-    @IsString()
+    @IsDate()
     @IsNotEmpty()
     hire_date: Date
 
