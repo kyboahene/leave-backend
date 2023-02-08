@@ -1,6 +1,7 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -10,7 +11,7 @@ async function bootstrap() {
   }))
 
   const config = new DocumentBuilder()
-    .setTitle('Leave system API')
+    .setTitle('Leave System API')
     .setDescription('The leave system API description')
     .setVersion('1.0')
     .build();

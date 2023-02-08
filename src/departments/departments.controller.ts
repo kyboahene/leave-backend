@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+
 import { JwtGuard } from '@/auth/guard';
 import { GetUser } from '@/auth/decorator';
 import { DepartmentsService } from './departments.service';
