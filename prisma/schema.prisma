@@ -67,6 +67,7 @@ model Division {
   Region     Region[]
   employee   Employee[]
   department Department[]
+  Holiday    Holiday[]
 }
 
 model Region {
@@ -131,6 +132,17 @@ model Comment {
 
   leave_id Int
   leave    Leave @relation(fields: [leave_id], references: [id], onDelete: Cascade)
+}
+
+model Holiday {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  holiday DateTime
+
+  division_id Int
+  division    Division @relation(fields: [division_id], references: [id], onDelete: Cascade)
 }
 
 enum EmployeeType {

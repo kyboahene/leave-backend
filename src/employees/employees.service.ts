@@ -47,9 +47,6 @@ export class EmployeesService {
   }
 
   async createMany(divisionId: number, createEmployeeDto: CreateEmployeeDto[]) {
-
-
-
     try {
       const createDto = createEmployeeDto.map((dto: CreateEmployeeDto) => {
         return {
