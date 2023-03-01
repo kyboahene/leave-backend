@@ -21,6 +21,9 @@ model User {
 
   employee Employee?
 
+  role_id Int
+  role    Role @relation(fields: [role_id], references: [id])
+
   @@map("users")
 }
 
@@ -41,9 +44,10 @@ model Employee {
   region_id Int
   region    Region @relation(fields: [region_id], references: [id], onDelete: Cascade)
 
-  user_id Int     @unique
-  user    User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id Int       @unique
+  user    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   leave   Leave[]
+  Comment Comment[]
 
   @@map("employees")
 }
@@ -55,6 +59,7 @@ model Role {
 
   name         String
   access_level Int
+  User         User[]
 }
 
 model Division {
@@ -113,14 +118,28 @@ model Leave {
   updated_at DateTime @updatedAt
 
   no_of_days Int
-  leave_year LeaveType
+  leave_type LeaveType
   status     LeaveStatus @default(STARTED)
   start_date DateTime
-  end_date   DateTime
+  end_date   DateTime?
 
   employee_id Int
-  employee    Employee  @relation(fields: [employee_id], references: [id], onDelete: Cascade)
+  employee    Employee    @relation(fields: [employee_id], references: [id], onDelete: Cascade)
   comment     Comment[]
+  leaveDays   LeaveDays[]
+}
+
+model LeaveDays {
+  id         Int      @id @default(autoincrement())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  start_date DateTime
+  end_date   DateTime
+  no_of_days Int
+
+  leave_id Int
+  leave    Leave @relation(fields: [leave_id], references: [id], onDelete: Cascade)
 }
 
 model Comment {
@@ -132,6 +151,9 @@ model Comment {
 
   leave_id Int
   leave    Leave @relation(fields: [leave_id], references: [id], onDelete: Cascade)
+
+  employee_id Int
+  employee    Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade)
 }
 
 model Holiday {
@@ -153,12 +175,14 @@ enum EmployeeType {
 enum LeaveType {
   ANNUAL
   CASUAL
-  PARTENITY
-  MARTENTY
+  PART
+  MATERNITY
+  SICK
 }
 
 enum LeaveStatus {
   STARTED
-  DIRECTOR_APPROVE
+  HOD_APPROVE
   SCHEDULE_OFFICER_REVIEWS
+  DIRECTOR_APPROVE
 }

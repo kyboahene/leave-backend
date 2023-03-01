@@ -55,9 +55,13 @@ export class AuthService {
             include: {
                 employee: {
                     select: {
+                        id: true,
                         division_id: true,
+                        employee_type: true,
+                        hire_date: true,
                     },
                 },
+
             },
         });
         if (!user) throw new ForbiddenException("Wrong email/password");
@@ -69,6 +73,9 @@ export class AuthService {
             id: user.id,
             name: user.name,
             email: user.email,
+            employee_id: user.employee.id,
+            hire_date: user.employee.hire_date,
+            employee_type: user.employee.employee_type,
             division_id: user.employee.division_id,
         };
 

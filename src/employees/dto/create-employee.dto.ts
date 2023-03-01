@@ -37,11 +37,11 @@ export class CreateEmployeeDto {
 
     @ApiProperty({
         description: 'The type of the employee',
-        example: "JUNIOR"
+        example: EmployeeType.JUNIOR
     })
     @IsString()
     @IsEnum(EmployeeType)
-    employee_type: "JUNIOR" | "SENIOR"
+    employee_type: EmployeeType
 
     @ApiProperty({
         description: 'The region id of the employee',

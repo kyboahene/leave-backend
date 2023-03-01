@@ -2,8 +2,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 import { PrismaService } from '@/prisma/prisma.service';
-import { CreateHolidayDto } from './dto/create-holiday.dto';
-import { UpdateHolidayDto } from './dto/update-holiday.dto';
+import { CreateHolidayDto, UpdateHolidayDto } from './dto';
 
 @Injectable()
 export class HolidaysService {
