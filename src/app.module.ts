@@ -11,6 +11,9 @@ import { DepartmentsModule } from './departments/departments.module';
 import { RegionsModule } from './regions/regions.module';
 import { DistrictsModule } from './districts/districts.module';
 import { CommentsModule } from './comments/comments.module';
+import { HolidaysModule } from './holidays/holidays.module';
+import { LeaveModule } from './leave/leave.module';
+import { LeaveDaysModule } from './leave-days/leave-days.module';
 
 @Module({
   imports: [
@@ -27,6 +30,9 @@ import { CommentsModule } from './comments/comments.module';
     RegionsModule,
     DistrictsModule,
     CommentsModule,
+    HolidaysModule,
+    LeaveModule,
+    LeaveDaysModule,
   ],
 })
 export class AppModule { }

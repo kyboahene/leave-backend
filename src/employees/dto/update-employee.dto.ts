@@ -8,7 +8,7 @@ export class UpdateEmployeeDto {
     })
     @IsString()
     @IsOptional()
-    employee_type?: "JUNIOR" | "SENIOR"
+    employee_type: "JUNIOR" | "SENIOR"
 
     @ApiProperty({
         description: 'The region id of the employee',
@@ -16,13 +16,14 @@ export class UpdateEmployeeDto {
     })
     @IsNumber()
     @IsOptional()
-    region_id?: number
+    region_id: number
 
+    @ApiProperty({
+        description: 'The district id of the employee',
+        example: 1
+    })
     @IsNumber()
     @IsOptional()
-    district_id?: number
+    district_id: number
 
-    @IsNumber()
-    @IsOptional()
-    user_id?: number
 }
