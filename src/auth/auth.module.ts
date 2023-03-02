@@ -6,10 +6,8 @@ import { AuthController } from './auth.controller';
 
 import { JwtStrategy } from './strategy/jwt.strategy';
 
-import { RolesService } from './../roles/roles.service';
-
 @Module({
-  imports: [JwtModule.register({}), RolesService],
+  imports: [JwtModule.register({})],
   providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
 })
