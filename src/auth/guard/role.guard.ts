@@ -1,25 +1,30 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class RolesGuard implements CanActivate {
-    constructor(private reflector: Reflector, private prisma: PrismaService) { }
+export class RoleGuard implements CanActivate {
+  constructor(private reflector: Reflector, private prisma: PrismaService) { }
 
-    matchRoles(roles: { name: string }[], userRole: string) {
-        return roles.some(role => role.name === userRole)
-    }
+  matchRoles(roles: number[], userRole: number) {
+    return roles.some(role => role === userRole)
+  }
 
-    async canActivate(context: ExecutionContext): Promise<boolean> {
-        // const roles = this.reflector.get<string[]>('roles', context.getHandler())
-        const roles = await this.prisma.role.findMany({
-            select: { name: true }
-        })
+  canActivate(
+    context: ExecutionContext,
+  ): boolean | Promise<boolean> | Observable<boolean> {
+    const roles = this.reflector.get<number[]>('roles', context.getHandler())
+    // const roles = this.prisma.role.findMany({
+    //   select: { access_level: true }
+    // }).then((data) => {
+    //   return data
+    // })
 
-        if (roles) return true
+    if (roles) return true
 
-        const request = context.switchToHttp().getRequest()
-        const user = request.user
-        return this.matchRoles(roles, user.role)
-    }
+    const request = context.switchToHttp().getRequest()
+    const user = request.user
+    return this.matchRoles(roles, user.access_level)
+  }
 }

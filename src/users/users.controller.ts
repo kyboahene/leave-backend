@@ -7,7 +7,7 @@ import { GetUser } from '../auth/decorator';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
 import { Roles } from '@/auth/decorator/role.decorator';
-import { RolesGuard } from '@/auth/guard/role.guard';
+import { RoleGuard } from '@/auth/guard/role.guard';
 
 @ApiTags('User')
 @Controller('user')
@@ -15,7 +15,7 @@ export class UsersController {
     constructor(private userService: UsersService) { }
 
     @Roles([6])
-    @UseGuards(JwtGuard, RolesGuard)
+    @UseGuards(JwtGuard, RoleGuard)
     @Get()
     @ApiCreatedResponse({
         description: "Returns an array of user objects as response",
