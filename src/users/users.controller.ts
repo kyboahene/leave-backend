@@ -14,7 +14,7 @@ import { RoleGuard } from '@/auth/guard/role.guard';
 export class UsersController {
     constructor(private userService: UsersService) { }
 
-    @Roles([6])
+    @Roles(6)
     @UseGuards(JwtGuard, RoleGuard)
     @Get()
     @ApiCreatedResponse({
