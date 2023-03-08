@@ -9,13 +9,13 @@ import { UpdateDistrictDto } from './dto/update-district.dto';
 export class DistrictsController {
   constructor(private readonly districtsService: DistrictsService) { }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Post()
   create(@Body() createDistrictDto: CreateDistrictDto) {
     return this.districtsService.create(createDistrictDto);
   }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Get()
   findAll(@GetUser('division_id') divisionId: number) {
     return this.districtsService.findAll(divisionId);
