@@ -8,13 +8,13 @@ import { CreateDivisionDto, UpdateDivisionDto } from './dto';
 export class DivisionsController {
   constructor(private readonly divisionsService: DivisionsService) { }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Post()
   create(@Body() createDivisionDto: CreateDivisionDto) {
     return this.divisionsService.create(createDivisionDto);
   }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Get()
   findAll() {
     return this.divisionsService.findAll();
