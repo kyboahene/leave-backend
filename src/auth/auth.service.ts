@@ -31,6 +31,7 @@ export class AuthService {
                     name: dto.name,
                     email: dto.email,
                     password: hashedPassword,
+                    role_id: dto.role_id
                 },
             });
             delete user.password;
@@ -61,7 +62,11 @@ export class AuthService {
                         hire_date: true,
                     },
                 },
-
+                role: {
+                    select: {
+                        access_level: true
+                    }
+                }
             },
         });
         if (!user) throw new ForbiddenException("Wrong email/password");
@@ -73,16 +78,18 @@ export class AuthService {
             id: user.id,
             name: user.name,
             email: user.email,
-            employee_id: user.employee.id,
-            hire_date: user.employee.hire_date,
+            employee_id: user.employee ? user.employee.id : 0,
+            hire_date: user.employee ? user.employee.hire_date : '20230208135834',
             employee_type: user.employee.employee_type,
-            division_id: user.employee.division_id,
+            division_id: user.employee.division_id ?? 0,
+            access_level: user.role.access_level
         };
 
         const accessToken = await this.signToken(userData, "3h");
 
         delete user.password
         delete user.employee
+        delete user.role
 
         return {
             ...user,
@@ -129,7 +136,7 @@ export class AuthService {
     }
 
     signToken(
-        data: { id: number; name: string; email: string; division_id?: number },
+        data: any,
         duration: string
     ): Promise<string> {
         return this.jwt.signAsync(data, {
