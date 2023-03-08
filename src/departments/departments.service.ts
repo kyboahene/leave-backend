@@ -33,6 +33,14 @@ export class DepartmentsService {
       return this.prisma.department.findMany({
         where: {
           division_id: divisionId
+        },
+        include: {
+          division: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
         }
       })
     } catch (error) {
@@ -43,7 +51,10 @@ export class DepartmentsService {
   findOne(id: number) {
     try {
       return this.prisma.department.findUnique({
-        where: { id }
+        where: { id },
+        include: {
+          division: true
+        }
       });
     } catch (error) {
       throw new Error(error)
