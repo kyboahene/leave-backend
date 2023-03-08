@@ -10,9 +10,6 @@ export class UsersService {
         return this.prisma.employee.findMany({
             where: {
                 division_id: divisionId
-            },
-            select: {
-                user: true
             }
         })
     }

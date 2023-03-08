@@ -1,9 +1,9 @@
 import * as argon from "argon2";
-import { Injectable, ForbiddenException } from '@nestjs/common';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { Injectable, ForbiddenException } from "@nestjs/common";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateEmployeeDto, UpdateEmployeeDto } from './dto';
+import { PrismaService } from "../prisma/prisma.service";
+import { CreateEmployeeDto, UpdateEmployeeDto } from "./dto";
 
 @Injectable()
 export class EmployeesService {
@@ -15,13 +15,16 @@ export class EmployeesService {
 
   async create(divisionId: number, createEmployeeDto: CreateEmployeeDto) {
     try {
-      const hashedPassword = await this.hashPassword(createEmployeeDto.password);
+      const hashedPassword = await this.hashPassword(
+        createEmployeeDto.password
+      );
 
       const employees = await this.prisma.user.create({
         data: {
           password: hashedPassword,
           name: createEmployeeDto.name,
           email: createEmployeeDto.email,
+          role_id: createEmployeeDto.role_id,
           employee: {
             create: {
               division_id: divisionId,
@@ -29,20 +32,20 @@ export class EmployeesService {
               region_id: createEmployeeDto.district_id,
               district_id: createEmployeeDto.district_id,
               employee_type: createEmployeeDto.employee_type,
-            }
-          }
-        }
-      })
+            },
+          },
+        },
+      });
 
-      return employees
+      return employees;
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === "P2002") {
-          throw new ForbiddenException('Employee already exists')
+          throw new ForbiddenException("Employee already exists");
         }
       }
 
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -53,6 +56,7 @@ export class EmployeesService {
           password: "pass123",
           name: dto.name,
           email: dto.email,
+          role_id: dto.role_id,
           employee: {
             create: {
               division_id: divisionId,
@@ -60,18 +64,18 @@ export class EmployeesService {
               region_id: dto.district_id,
               district_id: dto.district_id,
               employee_type: dto.employee_type,
-            }
-          }
-        }
-      })
+            },
+          },
+        };
+      });
 
       const employees = await this.prisma.user.createMany({
-        data: createDto
-      })
+        data: createDto,
+      });
 
-      return employees
+      return employees;
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -79,21 +83,41 @@ export class EmployeesService {
     try {
       return this.prisma.employee.findMany({
         where: {
-          division_id: divisionId
-        }
-      })
+          division_id: divisionId,
+        },
+        include: {
+          division: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          district: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          region: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      });
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
   findOne(id: number) {
     try {
       return this.prisma.employee.findUnique({
-        where: { id }
+        where: { id },
       });
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -104,7 +128,7 @@ export class EmployeesService {
         data: updateEmployeeDto,
       });
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 
@@ -112,7 +136,7 @@ export class EmployeesService {
     try {
       return this.prisma.employee.delete({ where: { id } });
     } catch (error) {
-      throw new Error(error)
+      throw new Error(error);
     }
   }
 }

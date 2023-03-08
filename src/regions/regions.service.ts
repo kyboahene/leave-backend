@@ -32,6 +32,14 @@ export class RegionsService {
     return this.prisma.region.findMany({
       where: {
         division_id: divisionId
+      },
+      include: {
+        division: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
       }
     })
   }
