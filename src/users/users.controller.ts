@@ -24,7 +24,7 @@ export class UsersController {
         description: 'Users cannot be retrieved. Try again!'
     })
     getUsers(@GetUser('division_id') divisionId: number) {
-        this.userService.findAll(divisionId)
+        return this.userService.findAll(divisionId)
     }
 
 
