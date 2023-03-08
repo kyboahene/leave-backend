@@ -12,7 +12,7 @@ import { CreateRoleDto, UpdateRoleDto } from './dto';
 export class RolesController {
   constructor(private rolesService: RolesService) { }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Post()
   @ApiCreatedResponse({
     description: "Created role object as response",
@@ -25,7 +25,7 @@ export class RolesController {
     return this.rolesService.create(createRoleDto);
   }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Get()
   @ApiCreatedResponse({
     description: "Returns an array of role object(s)",
@@ -50,7 +50,7 @@ export class RolesController {
     return this.rolesService.update(+id, updateRoleDto);
   }
 
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.rolesService.remove(+id);
