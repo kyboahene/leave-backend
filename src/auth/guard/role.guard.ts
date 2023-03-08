@@ -15,15 +15,10 @@ export class RoleGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const roles = this.reflector.get<number[]>('roles', context.getHandler())
-    // const roles = this.prisma.role.findMany({
-    //   select: { access_level: true }
-    // }).then((data) => {
-    //   return data
-    // })
+    // if (roles) return true
 
-    if (roles) return true
-
-    const request = context.switchToHttp().getRequest()
+    const request = context.switchToHttp()
+      .getRequest();
     const user = request.user
     return this.matchRoles(roles, user.access_level)
   }
