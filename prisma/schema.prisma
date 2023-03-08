@@ -38,14 +38,15 @@ model Employee {
   division_id Int
   division    Division @relation(fields: [division_id], references: [id], onDelete: Cascade)
 
-  district_id Int
-  district    District @relation(fields: [district_id], references: [id], onDelete: Cascade)
+  district_id Int?
+  district    District? @relation(fields: [district_id], references: [id], onDelete: Cascade)
 
   region_id Int
   region    Region @relation(fields: [region_id], references: [id], onDelete: Cascade)
 
-  user_id Int       @unique
-  user    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id Int  @unique
+  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
   leave   Leave[]
   Comment Comment[]
 
@@ -57,9 +58,10 @@ model Role {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  name         String
-  access_level Int
-  User         User[]
+  name         String @unique
+  access_level Int    @unique
+
+  user User[]
 }
 
 model Division {
@@ -70,9 +72,9 @@ model Division {
   name String
 
   Region     Region[]
+  Holiday    Holiday[]
   employee   Employee[]
   department Department[]
-  Holiday    Holiday[]
 }
 
 model Region {
@@ -108,8 +110,9 @@ model District {
   name String
 
   region_id Int
-  region    Region     @relation(fields: [region_id], references: [id], onDelete: Cascade)
-  Employee  Employee[]
+  region    Region @relation(fields: [region_id], references: [id], onDelete: Cascade)
+
+  Employee Employee[]
 }
 
 model Leave {
