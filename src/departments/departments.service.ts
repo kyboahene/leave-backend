@@ -1,3 +1,4 @@
+import { Department } from '@prisma/client';
 import { Injectable, ForbiddenException } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
@@ -34,7 +35,9 @@ export class DepartmentsService {
         where: {
           division_id: divisionId
         },
-        include: {
+        select: {
+          id: true,
+          name: true,
           division: {
             select: {
               id: true,
@@ -43,6 +46,7 @@ export class DepartmentsService {
           }
         }
       })
+
     } catch (error) {
       throw new Error(error)
     }
@@ -52,7 +56,9 @@ export class DepartmentsService {
     try {
       return this.prisma.department.findUnique({
         where: { id },
-        include: {
+        select: {
+          id: true,
+          name: true,
           division: true
         }
       });
@@ -78,5 +84,15 @@ export class DepartmentsService {
     } catch (error) {
       throw new Error(error)
     }
+  }
+
+  exclude<Department, Key extends keyof Department>(
+    department: Department,
+    keys: Key[]
+  ): Omit<Department, Key> {
+    for (let key of keys) {
+      delete department[key]
+    }
+    return department
   }
 }
