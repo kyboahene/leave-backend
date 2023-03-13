@@ -32,21 +32,27 @@ export class DistrictsService {
           division_id: divisionId,
         },
       },
-      include: {
+      select: {
+        id: true,
+        name: true,
         region: {
           select: {
             id: true,
-            name: true,
-          },
-        },
-      },
+            name: true
+          }
+        }
+      }
     });
   }
 
   findOne(id: number) {
     return this.prisma.district.findUnique({
       where: { id },
-      include: { region: true },
+      select: {
+        id: true,
+        name: true,
+        region: true
+      }
     });
   }
 
