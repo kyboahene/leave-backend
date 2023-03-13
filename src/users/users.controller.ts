@@ -27,7 +27,6 @@ export class UsersController {
         return this.userService.findAll(divisionId)
     }
 
-
     @UseGuards(JwtGuard)
     @Get("/me")
     @ApiCreatedResponse({
