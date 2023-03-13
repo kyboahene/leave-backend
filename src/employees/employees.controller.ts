@@ -16,7 +16,7 @@ export class EmployeesController {
   @UseGuards(JwtGuard)
   @Post()
   @ApiCreatedResponse({
-    description: "Created employee object as response",
+    description: "Return the created employee object as response",
     type: Employee
   })
   @ApiBadRequestResponse({
@@ -29,7 +29,7 @@ export class EmployeesController {
   @UseGuards(JwtGuard)
   @Get()
   @ApiCreatedResponse({
-    description: "Returned an array of employee object(s) as response",
+    description: "Returns an array of employee object(s) as response",
     type: [Employee]
   })
   @ApiBadRequestResponse({
@@ -39,22 +39,30 @@ export class EmployeesController {
     return this.employeesService.findAll(divisionId);
   }
 
-  @UseGuards(JwtGuard)
-  @Get(':id')
   @ApiCreatedResponse({
     description: "Return an employee object as response",
     type: Employee
   })
+  @UseGuards(JwtGuard)
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.employeesService.findOne(+id);
   }
 
+  @ApiCreatedResponse({
+    description: "Returns the updated employee object as response",
+    type: Employee
+  })
   @UseGuards(JwtGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
     return this.employeesService.update(+id, updateEmployeeDto);
   }
 
+  @ApiCreatedResponse({
+    description: "Returns a successful message",
+    type: "Employee deleted successfully"
+  })
   @UseGuards(JwtGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {

@@ -7,9 +7,19 @@ export class UsersService {
     constructor(private prisma: PrismaService) { }
 
     findAll(divisionId: number) {
-        return this.prisma.employee.findMany({
+        return this.prisma.user.findMany({
             where: {
-                division_id: divisionId
+                employee: {
+                    division_id: divisionId
+                }
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role_id: true,
+                employee: true,
+
             }
         })
     }

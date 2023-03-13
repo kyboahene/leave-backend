@@ -37,18 +37,30 @@ export class RegionsController {
     return this.regionsService.findAll(divisionId);
   }
 
+  @ApiCreatedResponse({
+    description: "Returned a region object as response",
+    type: Region
+  })
   @UseGuards(JwtGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.regionsService.findOne(+id);
   }
 
+  @ApiCreatedResponse({
+    description: "Returned the updated region object as response",
+    type: Region
+  })
   @UseGuards(JwtGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRegionDto: UpdateRegionDto) {
     return this.regionsService.update(+id, updateRegionDto);
   }
 
+  @ApiCreatedResponse({
+    description: "Returned a success message",
+    type: "Region was deleted successfully"
+  })
   @UseGuards(JwtGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {

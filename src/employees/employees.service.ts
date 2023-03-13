@@ -85,24 +85,27 @@ export class EmployeesService {
         where: {
           division_id: divisionId,
         },
-        include: {
+        select: {
+          id: true,
+          hire_date: true,
+          employee_type: true,
           division: {
             select: {
               id: true,
-              name: true,
+              name: true
             },
           },
           district: {
             select: {
               id: true,
-              name: true,
-            },
+              name: true
+            }
           },
           region: {
             select: {
               id: true,
-              name: true,
-            },
+              name: true
+            }
           },
         },
       });

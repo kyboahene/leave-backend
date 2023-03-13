@@ -6,7 +6,9 @@ import { LeaveService } from './leave.service';
 import { CreateLeaveDto } from './dto/create-leave.dto';
 import { UpdateLeaveDto } from './dto/update-leave.dto';
 import { AuthenticatedUser } from '@/auth/entities/authenticated-user.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Leave')
 @Controller('leave')
 export class LeaveController {
   constructor(private readonly leaveService: LeaveService) { }
